@@ -32,7 +32,8 @@ def guess():
     if num > random_number:
 
         return jsonify({
-            "message": "Guess a smaller number!",
+            "message": "Too high! Try a smaller number.",
+            "status": "high",
             "attempts": attempts,
             "correct": False
         })
@@ -40,7 +41,8 @@ def guess():
     elif num < random_number:
 
         return jsonify({
-            "message": "Guess a greater number!",
+            "message": "Too low! Try a greater number.",
+            "status": "low",
             "attempts": attempts,
             "correct": False
         })
@@ -48,7 +50,8 @@ def guess():
     else:
 
         return jsonify({
-            "message": "🎉 Congratulations! You guessed it!",
+            "message": "You guessed it!",
+            "status": "correct",
             "attempts": attempts,
             "correct": True
         })
@@ -58,6 +61,7 @@ def guess():
 def new_game():
 
     session["random_number"] = random.randint(1, 50)
+
     session["attempts"] = 0
 
     return jsonify({
